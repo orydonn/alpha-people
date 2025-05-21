@@ -58,6 +58,12 @@
             font-weight: bold;
             cursor: pointer;
         }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
         
         .content {
             padding: 15px;
@@ -103,6 +109,11 @@
             font-size: 32px;
             margin-bottom: 10px;
         }
+        .card-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
         
         /* Карточка "Моя заявка", растянутая на всю ширину */
         .card.application {
@@ -115,6 +126,10 @@
         .card.application .card-icon {
             font-size: 40px;
             color: #EF3124;
+        }
+        .card.application .card-icon img {
+            width: 48px;
+            height: 48px;
         }
         
         .card.application h3 {
@@ -215,6 +230,12 @@
             font-size: 40px;
             font-weight: bold;
             margin-bottom: 40px;
+        }
+        .login-logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: contain;
         }
         
         .login-title {
@@ -557,6 +578,12 @@
             font-size: 20px;
             color: #EF3124;
         }
+        .reminder-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: contain;
+        }
         
         .reminder-info {
             flex: 1;
@@ -627,6 +654,12 @@
             margin-right: 15px;
             font-size: 20px;
             color: #EF3124;
+        }
+        .document-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            object-fit: contain;
         }
         
         .document-info {
@@ -715,7 +748,7 @@
         <!-- Экран входа -->
         <div id="login-screen" class="screen active">
             <div class="login-screen">
-                <div class="login-logo">A</div>
+                <div class="login-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Alfa-Bank_logotype.png" alt="Alfa Bank"></div>
                 <h1 class="login-title">Добро пожаловать в Alfa People</h1>
                 <div class="login-form">
                     <div class="form-group">
@@ -734,7 +767,7 @@
         <div id="main-screen" class="screen">
             <div class="header">
                 <div class="logo">Alfa People</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="welcome-box">
@@ -744,23 +777,23 @@
                 <div class="card-grid">
                     <!-- Увеличенная карточка "Моя заявка" -->
                     <div class="card application" onclick="showScreen('application-screen')">
-                        <div class="card-icon">📋</div>
+                    <div class="card-icon"><img src="https://cdn-icons-png.flaticon.com/512/3143/3143460.png" alt="Заявка"></div>
                         <h3>Моя заявка</h3>
                         <p>Отслеживание статуса и документы</p>
                     </div>
                     <div class="card" onclick="showScreen('buddy-screen')">
-                        <div class="card-icon">👥</div>
+                    <div class="card-icon"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Баддинг"></div>
                         <h3>Баддинг</h3>
                         <p>Программа менторства</p>
                     </div>
                     <div class="card" onclick="showScreen('tour-screen')">
-                        <div class="card-icon">🏢</div>
+                    <div class="card-icon"><img src="https://cdn-icons-png.flaticon.com/512/148/148188.png" alt="Экскурсии"></div>
                         <h3>Экскурсии</h3>
                         <p>Виртуальные туры</p>
                     </div>
                     <!-- Карточка "Истории", растянутая на всю ширину -->
                     <div class="card stories" onclick="showScreen('stories-screen')">
-                        <div class="card-icon">📖</div>
+                    <div class="card-icon"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828932.png" alt="Истории"></div>
                         <h3>Истории</h3>
                         <p>Опыт сотрудников</p>
                     </div>
@@ -800,7 +833,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Баддинг</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -857,7 +890,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Истории</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -940,7 +973,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Экскурсии</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -988,7 +1021,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Геймификация</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -1062,7 +1095,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Профиль</div>
-                <div class="avatar">В</div>
+                <div class="avatar"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -1118,7 +1151,7 @@
         <div id="feed-screen" class="screen">
             <div class="header">
                 <div class="logo">Лента</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="news-card">
@@ -1168,7 +1201,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('profile-screen')">←</div>
                 <div class="logo">Статус заявки</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content application-dashboard">
                 <div class="status-card">
@@ -1211,7 +1244,7 @@
                 <div class="reminder-section">
                     <h2 class="section-title">Необходимые действия</h2>
                     <div class="reminder-card">
-                        <div class="reminder-icon">📝</div>
+                    <div class="reminder-icon"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" alt="Подписать"></div>
                         <div class="reminder-info">
                             <div class="reminder-title">Подписать трудовой договор</div>
                             <div class="reminder-desc">Необходимо подписать документ в электронном виде</div>
@@ -1219,7 +1252,7 @@
                         </div>
                     </div>
                     <div class="reminder-card">
-                        <div class="reminder-icon">🔒</div>
+                    <div class="reminder-icon"><img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Конфиденциальность"></div>
                         <div class="reminder-info">
                             <div class="reminder-title">Подписать соглашение о конфиденциальности</div>
                             <div class="reminder-desc">Требуется для доступа к корпоративным системам</div>
@@ -1251,28 +1284,28 @@
                 <div class="reminder-section">
                     <h2 class="section-title">Документы</h2>
                     <div class="document-card">
-                        <div class="document-icon">📄</div>
+                    <div class="document-icon"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Документ"></div>
                         <div class="document-info">
                             <div class="document-title">Трудовой договор</div>
                             <div class="document-status status-required">Требуется подписать</div>
                         </div>
                     </div>
                     <div class="document-card">
-                        <div class="document-icon">🔒</div>
+                    <div class="document-icon"><img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Конфиденциальность"></div>
                         <div class="document-info">
                             <div class="document-title">Соглашение о конфиденциальности</div>
                             <div class="document-status status-required">Требуется подписать</div>
                         </div>
                     </div>
                     <div class="document-card">
-                        <div class="document-icon">📋</div>
+                    <div class="document-icon"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Анкета"></div>
                         <div class="document-info">
                             <div class="document-title">Анкета сотрудника</div>
                             <div class="document-status status-completed">Заполнено</div>
                         </div>
                     </div>
                     <div class="document-card">
-                        <div class="document-icon">🎓</div>
+                    <div class="document-icon"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Диплом"></div>
                         <div class="document-info">
                             <div class="document-title">Копия диплома</div>
                             <div class="document-status status-completed">Загружено</div>
