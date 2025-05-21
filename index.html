@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa People</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 414px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #EF3124;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .content {
+            padding: 15px;
+            padding-bottom: 70px;
+            overflow-y: auto;
+            max-height: calc(100vh - 130px);
+        }
+        
+        .welcome-box {
+            background-color: #EF3124;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-box h2 {
+            margin-bottom: 10px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 1px solid #eee;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        /* Карточка "Моя заявка", растянутая на всю ширину */
+        .card.application {
+            grid-column: 1 / span 2; 
+            background-color: #f9e9e9;
+            border: 2px solid #EF3124;
+            padding: 20px;
+        }
+        
+        .card.application .card-icon {
+            font-size: 40px;
+            color: #EF3124;
+        }
+        
+        .card.application h3 {
+            font-size: 18px;
+            color: #EF3124;
+        }
+
+        /* Карточка "Истории", растянутая на всю ширину */
+        .card.stories {
+            grid-column: 1 / span 2;
+        }
+        
+        .card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .card p {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .news-section h2 {
+            margin-bottom: 15px;
+        }
+        
+        .news-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .news-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .news-card h3 {
+            margin-bottom: 10px;
+        }
+        
+        .news-card p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 414px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: #EF3124;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background-color: #EF3124;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .login-form {
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background-color: #EF3124;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #f1e6f0;
+            color: #EF3124;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 101;
+        }
+        
+        .screen {
+            display: none;
+            height: 100%;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        .mentor-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mentor-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #eee;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .mentor-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .mentor-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .story-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .story-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        /* Был "Shorts", переименовано в "Клипы" */
+        .shorts-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 5px 0;
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+        
+        .shorts-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .shorts-card {
+            min-width: 120px;
+            width: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .shorts-image {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .shorts-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+        }
+        
+        .shorts-info h4 {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+        
+        .shorts-info p {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+        
+        .game-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .game-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .game-info p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #EF3124;
+            border-radius: 4px;
+        }
+        
+        /* Стиль для дашборда заявки */
+        .application-dashboard {
+            padding: 15px;
+        }
+        
+        .status-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .status-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .status-badge {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .status-progress {
+            margin-bottom: 20px;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .step.completed .step-icon {
+            background-color: #EF3124;
+            color: white;
+        }
+        
+        .step.active .step-icon {
+            background-color: #EF3124;
+            color: white;
+            box-shadow: 0 0 0 3px rgba(239, 49, 36, 0.2);
+        }
+        
+        .step-label {
+            font-size: 10px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .step.completed .step-label,
+        .step.active .step-label {
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .progress-line {
+            height: 4px;
+            background-color: #eee;
+            position: relative;
+            margin: 0 15px;
+            margin-top: 15px;
+        }
+        
+        .progress-line-fill {
+            position: absolute;
+            height: 100%;
+            background-color: #EF3124;
+            left: 0;
+        }
+        
+        .reminder-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .reminder-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .reminder-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: #EF3124;
+        }
+        
+        .reminder-info {
+            flex: 1;
+        }
+        
+        .reminder-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .reminder-desc {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .reminder-date {
+            font-size: 12px;
+            color: #EF3124;
+            margin-top: 5px;
+        }
+        
+        .event-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .event-title {
+            font-weight: bold;
+        }
+        
+        .event-date {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .event-desc {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .document-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: #EF3124;
+        }
+        
+        .document-info {
+            flex: 1;
+        }
+        
+        .document-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .document-status {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .status-pending {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+        
+        .status-required {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+        
+        .contact-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-right: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .contact-name {
+            font-weight: bold;
+        }
+        
+        .contact-role {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .contact-info {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-button {
+            background-color: #EF3124;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Экран входа -->
+        <div id="login-screen" class="screen active">
+            <div class="login-screen">
+                <div class="login-logo">A</div>
+                <h1 class="login-title">Добро пожаловать в Alfa People</h1>
+                <div class="login-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email или телефон">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Пароль">
+                    </div>
+                    <button class="btn btn-primary" onclick="showScreen('main-screen')">Войти</button>
+                    <button class="btn btn-secondary" onclick="showScreen('main-screen')">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Главный экран -->
+        <div id="main-screen" class="screen">
+            <div class="header">
+                <div class="logo">Alfa People</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content">
+                <div class="welcome-box">
+                    <h2>Добро пожаловать, Владислав!</h2>
+                    <p>Исследуйте возможности Альфа-Банка и начните свой путь к успешной карьере</p>
+                </div>
+                <div class="card-grid">
+                    <!-- Увеличенная карточка "Моя заявка" -->
+                    <div class="card application" onclick="showScreen('application-screen')">
+                        <div class="card-icon">📋</div>
+                        <h3>Моя заявка</h3>
+                        <p>Отслеживание статуса и документы</p>
+                    </div>
+                    <div class="card" onclick="showScreen('buddy-screen')">
+                        <div class="card-icon">👥</div>
+                        <h3>Баддинг</h3>
+                        <p>Программа менторства</p>
+                    </div>
+                    <div class="card" onclick="showScreen('tour-screen')">
+                        <div class="card-icon">🏢</div>
+                        <h3>Экскурсии</h3>
+                        <p>Виртуальные туры</p>
+                    </div>
+                    <!-- Карточка "Истории", растянутая на всю ширину -->
+                    <div class="card stories" onclick="showScreen('stories-screen')">
+                        <div class="card-icon">📖</div>
+                        <h3>Истории</h3>
+                        <p>Опыт сотрудников</p>
+                    </div>
+                </div>
+                <div class="news-section">
+                    <h2>Последние новости</h2>
+                    <div class="news-card">
+                        <img src="https://alfabank.servicecdn.ru/media/news/top/c5/c5a9c5a9-c5a9-c5a9-c5a9-c5a9c5a9c5a9/1_1.jpg" alt="Альфа-Банк стажировки">
+                        <h3>Альфа-Банк запускает программу стажировок для IT-специалистов</h3>
+                        <p>Новая программа стажировок для студентов и выпускников технических специальностей стартует в июне 2025 года.</p>
+                    </div>
+                    <div class="news-card">
+                        <img src="https://alfabank.servicecdn.ru/media/news/top/a3/a3b2c1d0-e9f8-g7h6-i5j4-k3l2m1n0o9p8/2_1.jpg" alt="Alfa Tech 2025">
+                        <h3>Технологический форум Alfa Tech 2025</h3>
+                        <p>Приглашаем на ежегодный технологический форум, где будут представлены новейшие разработки Альфа-Банка.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран баддинга -->
+        <div id="buddy-screen" class="screen">
+            <div class="header">
+                <div class="back-button" onclick="showScreen('main-screen')">←</div>
+                <div class="logo">Баддинг</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content">
+                <div class="status-card">
+                    <h2>Программа менторства</h2>
+                    <p>Баддинг поможет вам адаптироваться в компании, получить поддержку опытного сотрудника и быстрее влиться в рабочий процесс.</p>
+                </div>
+                <h2>Ваш ментор</h2>
+                <div class="mentor-card">
+                    <div class="mentor-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                    <div class="mentor-info">
+                        <h3>Олег Петров</h3>
+                        <p>IT-аналитик, 5 лет в Альфа-Банке</p>
+                        <p>Помог 12 новым сотрудникам</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="alert('Сообщение отправлено')">Написать ментору</button>
+                <button class="btn btn-secondary" onclick="alert('Встреча запланирована')">Запланировать встречу</button>
+                <h2>Другие менторы</h2>
+                <div class="mentor-card">
+                    <div class="mentor-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                    <div class="mentor-info">
+                        <h3>Анна Иванова</h3>
+                        <p>HR-специалист, 3 года в Альфа-Банке</p>
+                        <p>Помогла 8 новым сотрудникам</p>
+                    </div>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/67.jpg');"></div>
+                    <div class="mentor-info">
+                        <h3>Михаил Боков</h3>
+                        <p>Frontend-разработчик, 4 года в Альфа-Банке</p>
+                        <p>Помог 15 новым сотрудникам</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран историй -->
+        <div id="stories-screen" class="screen">
+            <div class="header">
+                <div class="back-button" onclick="showScreen('main-screen')">←</div>
+                <div class="logo">Истории</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content">
+                <div class="status-card">
+                    <h2>Истории сотрудников</h2>
+                    <p>Узнайте о карьерном пути и опыте работы сотрудников Альфа-Банка.</p>
+                </div>
+                
+                <!-- "Клипы" от разных людей, короткие истории -->
+                <h2>Клипы</h2>
+                <div class="shorts-container">
+                    <div class="shorts-card">
+                        <div class="shorts-image" style="background-image: url('https://randomuser.me/api/portraits/men/51.jpg');"></div>
+                        <div class="shorts-info">
+                            <h4>Иван Егоров</h4>
+                            <p>Учёба и работа</p>
+                        </div>
+                    </div>
+                    <div class="shorts-card">
+                        <div class="shorts-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
+                        <div class="shorts-info">
+                            <h4>Ольга Назарова</h4>
+                            <p>Первый день в IT</p>
+                        </div>
+                    </div>
+                    <div class="shorts-card">
+                        <div class="shorts-image" style="background-image: url('https://randomuser.me/api/portraits/men/73.jpg');"></div>
+                        <div class="shorts-info">
+                            <h4>Сергей Кузнецов</h4>
+                            <p>Карьерная лестница</p>
+                        </div>
+                    </div>
+                    <div class="shorts-card">
+                        <div class="shorts-image" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg');"></div>
+                        <div class="shorts-info">
+                            <h4>Алина Белова</h>
+                            <p>Гибкий график</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>Истории успеха</h2>
+                <!-- "Истории" с другими именами и описаниями -->
+                <div class="story-card">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Павел Кравцов">
+                    <h3>Как я вырос от стажера до руководителя</h3>
+                    <p>Павел делится своим опытом быстрого карьерного роста в Альфа-Банке.</p>
+                    <button class="btn btn-primary">Подробнее</button>
+                </div>
+                <div class="story-card">
+                    <img src="https://randomuser.me/api/portraits/women/53.jpg" alt="Марина Федорова">
+                    <h3>Почему я выбрала Альфа-Банк после госсектора</h3>
+                    <p>Марина о сложностях перехода и главных плюсах новой работы.</p>
+                    <button class="btn btn-primary">Подробнее</button>
+                </div>
+                <div class="story-card">
+                    <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="Денис Сидоров">
+                    <h3>Мой первый проект в команде цифровых продуктов</h3>
+                    <p>Денис рассказывает о разработке нового мобильного сервиса и полученных уроках.</p>
+                    <button class="btn btn-primary">Подробнее</button>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экскурсии -->
+        <div id="tour-screen" class="screen">
+            <div class="header">
+                <div class="back-button" onclick="showScreen('main-screen')">←</div>
+                <div class="logo">Экскурсии</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content">
+                <div class="status-card">
+                    <h2>Виртуальные экскурсии</h2>
+                    <p>Познакомьтесь с офисами Альфа-Банка и рабочей атмосферой компании.</p>
+                </div>
+                <!-- Добавлены изображения в экскурсиях -->
+                <div class="story-card">
+                    <img src="https://alfabank.servicecdn.ru/media/about/office/main/office-main-1.jpg" alt="Главный офис в Москве">
+                    <h3>Главный офис в Москве</h3>
+                    <p>Виртуальный тур по штаб-квартире Альфа-Банка.</p>
+                    <button class="btn btn-primary">Начать тур</button>
+                </div>
+                <div class="story-card">
+                    <img src="https://alfabank.servicecdn.ru/media/about/office/tech/office-tech-1.jpg" alt="IT-офис на Технопарке">
+                    <h3>IT-офис на Технопарке</h3>
+                    <p>Познакомьтесь с рабочим пространством IT-команды.</p>
+                    <button class="btn btn-primary">Начать тур</button>
+                </div>
+                <div class="story-card">
+                    <img src="https://alfabank.servicecdn.ru/media/about/office/lab/office-lab-1.jpg" alt="Инновационная лаборатория">
+                    <h3>Инновационная лаборатория</h3>
+                    <p>Узнайте, где создаются и тестируются новые продукты.</p>
+                    <button class="btn btn-primary">Начать тур</button>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Геймификация -->
+        <div id="game-screen" class="screen">
+            <div class="header">
+                <div class="back-button" onclick="showScreen('main-screen')">←</div>
+                <div class="logo">Геймификация</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content">
+                <div class="status-card">
+                    <h2>Квизы и награды</h2>
+                    <p>Проверьте свои знания о компании и банковской сфере, зарабатывайте баллы и получайте награды.</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background-image: url('https://alfabank.servicecdn.ru/media/games/finance/finance-quiz.jpg');">🏆</div>
+                    <div class="game-info">
+                        <h3>Финансовый квиз</h3>
+                        <p>10 вопросов о финансах и банковских продуктах</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background-image: url('https://alfabank.servicecdn.ru/media/games/it/it-puzzle.jpg');">🧩</div>
+                    <div class="game-info">
+                        <h3>IT-головоломка</h3>
+                        <p>Решите технические задачи и головоломки</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background-image: url('https://alfabank.servicecdn.ru/media/games/corp/corp-quest.jpg');">🎯</div>
+                    <div class="game-info">
+                        <h3>Корпоративный квест</h3>
+                        <p>Изучите историю и ценности Альфа-Банка</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Ваши достижения</h2>
+                <div class="game-card">
+                    <div class="game-icon" style="background-image: url('https://alfabank.servicecdn.ru/media/games/achievements/achievement-1.jpg');">🥇</div>
+                    <div class="game-info">
+                        <h3>Новичок</h3>
+                        <p>Завершите регистрацию и заполните профиль</p>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon" style="background-image: url('https://alfabank.servicecdn.ru/media/games/achievements/achievement-2.jpg');">🥈</div>
+                    <div class="game-info">
+                        <h3>Исследователь</h3>
+                        <p>Пройдите все виртуальные экскурсии</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item active" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Профиль -->
+        <div id="profile-screen" class="screen">
+            <div class="header">
+                <div class="back-button" onclick="showScreen('main-screen')">←</div>
+                <div class="logo">Профиль</div>
+                <div class="avatar">В</div>
+            </div>
+            <div class="content">
+                <div class="status-card">
+                    <div class="mentor-card" style="border: none; padding: 0; margin: 0 0 15px 0;">
+                        <div class="mentor-avatar" style="width: 80px; height: 80px; background-image: url('https://randomuser.me/api/portraits/men/85.jpg');"></div>
+                        <div class="mentor-info">
+                            <h3>Владислав Смирнов</h3>
+                            <p>Кандидат на позицию Frontend-разработчика</p>
+                            <button class="btn btn-primary" style="margin-top: 10px;" onclick="showScreen('application-screen')">Статус заявки</button>
+                        </div>
+                    </div>
+                </div>
+                <h2>Ваши достижения</h2>
+                <div class="game-card">
+                    <div class="game-icon" style="background-image: url('https://alfabank.servicecdn.ru/media/games/achievements/achievement-1.jpg');">🥇</div>
+                    <div class="game-info">
+                        <h3>Новичок</h3>
+                        <p>Завершите регистрацию и заполните профиль</p>
+                    </div>
+                </div>
+                <h2>Настройки</h2>
+                <div class="news-card">
+                    <h3>Личные данные</h3>
+                    <p>Управление личной информацией и контактами</p>
+                </div>
+                <div class="news-card">
+                    <h3>Уведомления</h3>
+                    <p>Настройка уведомлений и оповещений</p>
+                </div>
+                <div class="news-card">
+                    <h3>Безопасность</h3>
+                    <p>Изменение пароля и настройки безопасности</p>
+                </div>
+                <button class="btn btn-secondary" onclick="showScreen('login-screen')">Выйти</button>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Лента -->
+        <div id="feed-screen" class="screen">
+            <div class="header">
+                <div class="logo">Лента</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content">
+                <div class="news-card">
+                    <img src="https://alfabank.servicecdn.ru/media/news/top/c5/c5a9c5a9-c5a9-c5a9-c5a9-c5a9c5a9c5a9/1_1.jpg" alt="Альфа-Банк стажировки">
+                    <h3>Альфа-Банк запускает программу стажировок для IT-специалистов</h3>
+                    <p>Новая программа стажировок для студентов и выпускников технических специальностей стартует в июне 2025 года.</p>
+                </div>
+                <div class="news-card">
+                    <img src="https://alfabank.servicecdn.ru/media/news/top/a3/a3b2c1d0-e9f8-g7h6-i5j4-k3l2m1n0o9p8/2_1.jpg" alt="Alfa Tech 2025">
+                    <h3>Технологический форум Alfa Tech 2025</h3>
+                    <p>Приглашаем на ежегодный технологический форум, где будут представлены новейшие разработки Альфа-Банка.</p>
+                </div>
+                <div class="news-card">
+                    <img src="https://alfabank.servicecdn.ru/media/news/top/b2/b2c3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7/3_1.jpg" alt="Digital-офис">
+                    <h3>Открытие нового Digital-офиса Альфа-Банка</h3>
+                    <p>В Москве открылся новый цифровой офис Альфа-Банка с инновационными технологиями обслуживания.</p>
+                </div>
+                <div class="news-card">
+                    <img src="https://alfabank.servicecdn.ru/media/news/top/d4/d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9/4_1.jpg" alt="Хакатон Alfa Digital 2025">
+                    <h3>Результаты хакатона Alfa Digital 2025</h3>
+                    <p>Подведены итоги внутреннего хакатона Альфа-Банка по разработке инновационных решений.</p>
+                </div>
+                <div class="news-card">
+                    <img src="https://alfabank.servicecdn.ru/media/news/top/e5/e5f6g7h8-i9j0-k1l2-m3n4-o5p6q7r8s9t0/5_1.jpg" alt="Новые вакансии IT">
+                    <h3>Новые возможности для карьерного роста в IT</h3>
+                    <p>Открыты новые вакансии в IT-департаменте Альфа-Банка для специалистов разного уровня.</p>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item active" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дашборд заявки -->
+        <div id="application-screen" class="screen">
+            <div class="header">
+                <div class="back-button" onclick="showScreen('profile-screen')">←</div>
+                <div class="logo">Статус заявки</div>
+                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+            </div>
+            <div class="content application-dashboard">
+                <div class="status-card">
+                    <div class="status-header">
+                        <div class="status-title">Ваша заявка</div>
+                        <div class="status-badge">В процессе</div>
+                    </div>
+                    <div class="status-progress">
+                        <div class="progress-steps">
+                            <div class="step completed">
+                                <div class="step-icon">✓</div>
+                                <div class="step-label">Заявка</div>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-icon">✓</div>
+                                <div class="step-label">Интервью</div>
+                            </div>
+                            <div class="step active">
+                                <div class="step-icon">3</div>
+                                <div class="step-label">Документы</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-icon">4</div>
+                                <div class="step-label">Проверка</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-icon">5</div>
+                                <div class="step-label">Оффер</div>
+                            </div>
+                        </div>
+                        <div class="progress-line">
+                            <div class="progress-line-fill" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <p>Позиция: Frontend-разработчик</p>
+                    <p>Дата подачи заявки: 15 мая 2025</p>
+                    <p>Ожидаемая дата завершения: 30 мая 2025</p>
+                </div>
+
+                <div class="reminder-section">
+                    <h2 class="section-title">Необходимые действия</h2>
+                    <div class="reminder-card">
+                        <div class="reminder-icon">📝</div>
+                        <div class="reminder-info">
+                            <div class="reminder-title">Подписать трудовой договор</div>
+                            <div class="reminder-desc">Необходимо подписать документ в электронном виде</div>
+                            <div class="reminder-date">Срок: 22 мая 2025</div>
+                        </div>
+                    </div>
+                    <div class="reminder-card">
+                        <div class="reminder-icon">🔒</div>
+                        <div class="reminder-info">
+                            <div class="reminder-title">Подписать соглашение о конфиденциальности</div>
+                            <div class="reminder-desc">Требуется для доступа к корпоративным системам</div>
+                            <div class="reminder-date">Срок: 22 мая 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reminder-section">
+                    <h2 class="section-title">Предстоящие события</h2>
+                    <div class="event-card">
+                        <div class="event-header">
+                            <div class="event-title">Цифровой семинар по оформлению документов</div>
+                            <div class="event-date">23 мая, 14:00</div>
+                        </div>
+                        <div class="event-desc">Онлайн-встреча с HR-специалистом для разъяснения процесса оформления документов</div>
+                        <button class="btn btn-primary">Присоединиться</button>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-header">
+                            <div class="event-title">Встреча с руководителем</div>
+                            <div class="event-date">25 мая, 11:00</div>
+                        </div>
+                        <div class="event-desc">Знакомство с руководителем и обсуждение будущих задач</div>
+                        <button class="btn btn-primary">Подтвердить участие</button>
+                    </div>
+                </div>
+
+                <div class="reminder-section">
+                    <h2 class="section-title">Документы</h2>
+                    <div class="document-card">
+                        <div class="document-icon">📄</div>
+                        <div class="document-info">
+                            <div class="document-title">Трудовой договор</div>
+                            <div class="document-status status-required">Требуется подписать</div>
+                        </div>
+                    </div>
+                    <div class="document-card">
+                        <div class="document-icon">🔒</div>
+                        <div class="document-info">
+                            <div class="document-title">Соглашение о конфиденциальности</div>
+                            <div class="document-status status-required">Требуется подписать</div>
+                        </div>
+                    </div>
+                    <div class="document-card">
+                        <div class="document-icon">📋</div>
+                        <div class="document-info">
+                            <div class="document-title">Анкета сотрудника</div>
+                            <div class="document-status status-completed">Заполнено</div>
+                        </div>
+                    </div>
+                    <div class="document-card">
+                        <div class="document-icon">🎓</div>
+                        <div class="document-info">
+                            <div class="document-title">Копия диплома</div>
+                            <div class="document-status status-completed">Загружено</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/28.jpg');"></div>
+                        <div>
+                            <div class="contact-name">Елена Соколова</div>
+                            <div class="contact-role">HR-специалист</div>
+                        </div>
+                    </div>
+                    <div class="contact-info">Email: e.sokolova@alfabank.ru</div>
+                    <div class="contact-info">Телефон: +7 (999) 123-45-67</div>
+                    <button class="contact-button">Связаться</button>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('main-screen')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Главная</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('feed-screen')">
+                    <div class="nav-icon">📚</div>
+                    <div>Лента</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('game-screen')">
+                    <div class="nav-icon">🎮</div>
+                    <div>Игры</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showScreen(screenId) {
+            // Скрываем все экраны
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Показываем выбранный экран
+            document.getElementById(screenId).classList.add('active');
+            
+            // Сбрасываем все пункты нижнего меню
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Активируем соответствующий пункт меню
+            if (screenId === 'main-screen') {
+                document.querySelectorAll('.nav-item')[0].classList.add('active');
+            } else if (screenId === 'feed-screen') {
+                document.querySelectorAll('.nav-item')[1].classList.add('active');
+            } else if (screenId === 'game-screen') {
+                document.querySelectorAll('.nav-item')[2].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
