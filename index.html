@@ -58,6 +58,12 @@
             font-weight: bold;
             cursor: pointer;
         }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
         
         .content {
             padding: 15px;
@@ -215,6 +221,12 @@
             font-size: 40px;
             font-weight: bold;
             margin-bottom: 40px;
+        }
+        .login-logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: contain;
         }
         
         .login-title {
@@ -715,7 +727,7 @@
         <!-- Экран входа -->
         <div id="login-screen" class="screen active">
             <div class="login-screen">
-                <div class="login-logo">A</div>
+                <div class="login-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Alfa-Bank_logotype.png" alt="Alfa Bank"></div>
                 <h1 class="login-title">Добро пожаловать в Alfa People</h1>
                 <div class="login-form">
                     <div class="form-group">
@@ -734,7 +746,7 @@
         <div id="main-screen" class="screen">
             <div class="header">
                 <div class="logo">Alfa People</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="welcome-box">
@@ -800,7 +812,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Баддинг</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -857,7 +869,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Истории</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -940,7 +952,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Экскурсии</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -988,7 +1000,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Геймификация</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -1062,7 +1074,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('main-screen')">←</div>
                 <div class="logo">Профиль</div>
-                <div class="avatar">В</div>
+                <div class="avatar"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="status-card">
@@ -1118,7 +1130,7 @@
         <div id="feed-screen" class="screen">
             <div class="header">
                 <div class="logo">Лента</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content">
                 <div class="news-card">
@@ -1168,7 +1180,7 @@
             <div class="header">
                 <div class="back-button" onclick="showScreen('profile-screen')">←</div>
                 <div class="logo">Статус заявки</div>
-                <div class="avatar" onclick="showScreen('profile-screen')">В</div>
+                <div class="avatar" onclick="showScreen('profile-screen')"><img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Профиль"></div>
             </div>
             <div class="content application-dashboard">
                 <div class="status-card">
